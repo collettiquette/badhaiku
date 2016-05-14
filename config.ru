@@ -3,5 +3,5 @@ require 'bundler'
 
 Bundler.require
 
-require_relative 'server.rb'
+require_relative 'app.rb'
 run PoemsApp

@@ -1,13 +1,15 @@
 require 'sinatra'
+require 'sinatra/activerecord'
 require_relative 'lib/word'
-require_relative 'lib/word_list'
-require_relative 'lib/poem_maker'
 
+set :database, {adapter: 'sqlite3', database: 'words.sqlite3'}
 Tilt.register Tilt::ERBTemplate, 'html.erb'
 
 class PoemsApp < Sinatra::Base
+  register Sinatra::ActiveRecordExtension
+
   get '/' do
-    @lines = (0..2).map { PoemMaker.new.stanza }
+    p Word.count
     erb :index
   end
 end
