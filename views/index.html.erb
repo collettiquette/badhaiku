@@ -1,9 +1,13 @@
 <html>
 <head>
+  <link href='https://fonts.googleapis.com/css?family=Dosis:400,500' rel='stylesheet' type='text/css'>
+  <link rel="stylesheet" type="text/css" href="skeleton.css">
+  <link rel="stylesheet" type="text/css" href="poems.css">
 </head>
-<body>
-  <h1>Poems</h1>
-  <p><%= @lines[0] %></p>
-  <p><%= @lines[1] %></p>
-  <p><%= @lines[2] %></p>
+<body class='container'>
+  <div class='poem'>
+    <p><%= @lines[0] %></p>
+    <p><%= @lines[1] %></p>
+    <p><%= @lines[2] %></p>
+  </div>
 </body>
