@@ -5,8 +5,4 @@ namespace :db do
   task :load_config do
     require './app'
   end
-
-  task :seed do
-    Importer.import!
-  end
 end
