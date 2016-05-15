@@ -4,7 +4,6 @@ require_relative 'lib/word'
 require_relative 'lib/stanza'
 require_relative 'lib/haiku'
 
-set :database, {adapter: 'sqlite3', database: 'words.sqlite3'}
 Tilt.register Tilt::ERBTemplate, 'html.erb'
 
 class PoemsApp < Sinatra::Base
