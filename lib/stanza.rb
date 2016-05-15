@@ -12,6 +12,7 @@ class Stanza
       word = Word.where(part_of_speech: valid_next(pos), 
                         syllable_count: (1..max).to_a.sample).order("RANDOM()").first
       @words.push(word)
+      pos = valid_next(pos)
       syllables_used -= word.syllable_count  
       max = syllables_used if syllables_used < max
     end
