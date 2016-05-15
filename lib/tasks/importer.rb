@@ -1,7 +1,7 @@
 module Importer
   def import!
     (1..4).each do |i|
-      ['adjectives', 'verbs', 'adverbs'].each do |pos|
+      ['nouns', 'adjectives', 'verbs', 'adverbs'].each do |pos|
         import_words("data/words/#{pos}/#{i}syllable#{pos}.txt", pos.chomp('s'), i)
       end
     end
