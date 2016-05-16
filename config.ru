@@ -4,4 +4,4 @@ require 'bundler'
 Bundler.require
 
 require_relative 'app.rb'
-run PoemsApp
+run BadHaikuApp

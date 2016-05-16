@@ -6,7 +6,7 @@ require_relative 'lib/haiku'
 
 Tilt.register Tilt::ERBTemplate, 'html.erb'
 
-class PoemsApp < Sinatra::Base
+class BadHaikuApp < Sinatra::Base
   register Sinatra::ActiveRecordExtension
 
   get '/' do
