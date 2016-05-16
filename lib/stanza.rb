@@ -2,29 +2,40 @@ class Stanza
   def initialize(max_syllables)
     @max_syllables = max_syllables
     @words = []
+    @syllables_unused = @max_syllables
+    @current_part_of_speech = "all"
+    @max_syllables = 4
   end
 
   def generate!
-    syllables_used = @max_syllables
-    pos = ""
-    max = 4
-    while syllables_used > 0
-      word = Word.where(part_of_speech: valid_next(pos), 
-                        syllable_count: (1..max).to_a.sample).order("RANDOM()").first
+    while @syllables_unused > 0
+      word = find_word
       @words.push(word)
-      pos = valid_next(pos)
-      syllables_used -= word.syllable_count  
-      max = syllables_used if syllables_used < max
+      @syllables_unused -= word.syllable_count  
+      valid_next
+      shift_max
     end
     @words.map(&:name).join(" ")
   end
 
-  def valid_next(pos)
-    return %w(adjective verb adverb noun).sample if pos == ""
-    send(pos).sample
+  private
+
+  def find_word
+    Word.where(part_of_speech: valid_next,
+               syllable_count: (1..@max_syllables).to_a.sample).order("RANDOM()").first
   end
 
-  private
+  def shift_max
+    @max_syllables = @syllables_unused if @syllables_unused < @max_syllables
+  end
+
+  def valid_next
+    @current_part_of_speech = send(@current_part_of_speech).sample
+  end
+
+  def all
+    %w(adjective verb adverb noun)
+  end
 
   def adjective
     %w(verb noun)
@@ -40,9 +51,5 @@ class Stanza
 
   def adverb
     %w(verb)
-  end
-
-  def random_word
-    Word.offset(rand(Word.count)).first
   end
 end
